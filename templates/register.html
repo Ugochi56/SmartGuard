@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register | SmartGuard Pro</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg">
+  <div class="glass-card">
+    <h2>Create a New Account</h2>
+    <form method="POST" action="{{ url_for('register') }}">
+      <input type="text" name="username" placeholder="Username" required class="input-3d">
+      <input type="email" name="email" placeholder="Email" required class="input-3d">
+      <input type="password" name="password" placeholder="Password" required class="input-3d">
+      <button type="submit" class="btn-3d">Register</button>
+    </form>
+    <a href="{{ url_for('login') }}" class="link-3d">Already have an account?</a>
+  </div>
+</body>
+</html>

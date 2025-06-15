@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | SmartGuard Pro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg">
+    <div class="glass-card wide">
+        <h2>Welcome, {{ current_user.username }} 👋</h2>
+
+        {% if last_scan %}
+            <p><strong>Last Scan File:</strong> {{ last_scan.filename }}</p>
+            <p><strong>Scanned At:</strong> {{ last_scan.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+            <p><strong>Total Packets:</strong> {{ last_scan.total_packets }}</p>
+
+            <h3>Top Vulnerabilities</h3>
+            <ul>
+                {% for ip, vulns in last_scan.vulnerabilities.items() %}
+                    <li>
+                        <strong>{{ ip }}</strong>
+                        <ul>
+                            {% for vuln in vulns[:3] %}
+                                <li>{{ vuln }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            {% if last_scan.graph_filename %}
+                <h3>Vulnerability Graph</h3>
+                <img class="graph" src="{{ url_for('static', filename='graphs/' + last_scan.graph_filename) }}" alt="Graph">
+            {% endif %}
+        {% else %}
+            <p>No scans have been uploaded yet. Start one below.</p>
+        {% endif %}
+
+        <div class="btn-group">
+            <a href="{{ url_for('upload') }}" class="btn-3d">New Scan</a>
+            <a href="{{ url_for('archive') }}" class="btn-3d">View Scan Archive</a>
+            <a href="{{ url_for('logout') }}" class="btn-3d">Logout</a>
+        </div>
+    </div>
+</body>
+</html>

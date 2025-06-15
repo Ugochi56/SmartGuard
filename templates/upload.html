@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload File | SmartGuard Pro</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg">
+  <div class="glass-card">
+    <h2>Upload Network Log</h2>
+    <form method="POST" enctype="multipart/form-data">
+      <input type="file" name="file" accept=".csv,.pcapng" class="input-3d" required>
+      <button type="submit" class="btn-3d">Analyze</button>
+    </form>
+    <a href="{{ url_for('dashboard') }}" class="btn-3d">Back to Dashboard</a>
+  </div>
+</body>
+</html>

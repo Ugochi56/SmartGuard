@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | SmartGuard Pro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg">
+    <div class="glass-card">
+        <h2>Welcome Back 👋</h2>
+        <p>Please log in to continue</p>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="flash-messages">
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username" class="input-3d" required>
+            <input type="password" name="password" placeholder="Password" class="input-3d" required>
+            <button type="submit" class="btn-3d">Login</button>
+        </form>
+
+        <p>Don't have an account?</p>
+        <a href="{{ url_for('register') }}" class="btn-3d">Create Account</a>
+    </div>
+</body>
+</html>

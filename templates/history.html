@@ -1,0 +1,7 @@
+<h2>Scan History</h2>
+{% for scan in scans %}
+    <p>{{ scan.filename }} - {{ scan.date_scanned }}</p>
+{% else %}
+    <p>No past scans.</p>
+{% endfor %}
+<a href="/dashboard">Back to Dashboard</a>

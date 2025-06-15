@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scan Archive | SmartGuard Pro</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg">
+  <div class="glass-card wide">
+    <h2>📂 Your Scan History</h2>
+
+    {% if scans %}
+      <table class="archive-table">
+        <thead>
+          <tr>
+            <th>Scan ID</th>
+            <th>Date</th>
+            <th>Filename</th>
+            <th>Total Packets</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for scan in scans %}
+          <tr>
+            <td>{{ scan.id }}</td>
+            <td>{{ scan.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+            <td>{{ scan.filename }}</td>
+            <td>{{ scan.total_packets }}</td>
+            <td>
+              <a href="{{ url_for('report', scan_id=scan.id) }}" class="btn-3d">View</a>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No previous scans available.</p>
+    {% endif %}
+
+    <div class="btn-group">
+      <a href="{{ url_for('dashboard') }}" class="btn-3d">Dashboard</a>
+      <a href="{{ url_for('upload') }}" class="btn-3d">New Scan</a>
+    </div>
+  </div>
+</body>
+</html>
