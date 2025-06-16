@@ -9,3 +9,6 @@ uploads/
 *.pdf
 *.json
 . 
+"uploads/" 
+"*.db" 
+"*.pcapng" 
