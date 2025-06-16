@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_migrate import Migrate
+from flask_migrate import Migrate, upgrade
 from dotenv import load_dotenv
 import os
 import datetime
@@ -234,6 +234,13 @@ def report(scan_id):
 def archive():
     scans = Scan.query.filter_by(user_id=current_user.id).order_by(Scan.timestamp.desc()).all()
     return render_template('archive.html', scans=scans)
+@app.route('/migrate')
+def run_migrations():
+    try:
+        upgrade()
+        return "✅ Migration complete!", 200
+    except Exception as e:
+        return f"❌ Migration failed: {str(e)}", 500
 
 if __name__ == '__main__':
     app.run(debug=True)
