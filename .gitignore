@@ -12,3 +12,5 @@ uploads/
 "uploads/" 
 "*.db" 
 "*.pcapng" 
+"static/archive/meh.pcapng" 
+"static/archive/meh.pcapng" 
